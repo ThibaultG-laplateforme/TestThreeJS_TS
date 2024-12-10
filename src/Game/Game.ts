@@ -6,6 +6,7 @@ export class Game {
     public readonly scene !: THREE.Scene;
     public readonly renderer !: THREE.WebGLRenderer;
     public readonly camera !: Camera;
+    public readonly canvas !: HTMLCanvasElement;
 
     public torus !:  THREE.Mesh;
 
@@ -15,9 +16,14 @@ export class Game {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-        this.camera = new Camera(this.scene);
+        this.camera = new Camera(this);
+        this.canvas = canvas;
 
         this.initObject();
+        this.initLight();
+        this.initDebug();
+
+
         window.requestAnimationFrame(() => this.update())
     }
 
@@ -26,10 +32,23 @@ export class Game {
         const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 ); //Objet
         // Un MeshBasicMaterial est unlit
         // Un MeshStandardMaterial est lit
-        const material = new THREE.MeshBasicMaterial( { color: 0xffffff } ); //Shader
+        const material = new THREE.MeshStandardMaterial( { color: 0xffffff } ); //Shader
         this.torus = new THREE.Mesh( geometry, material ); //composition de l'objet+shader
         // ---------------------
         this.scene.add( this.torus ); //Ajout dans la scène en position  0, 0, 0
+    }
+
+    private initLight(){
+        const pointLight = new THREE.PointLight(0xff0000, 100, 200); // couleur, intensite, taille
+        pointLight.position.set(10, 10, 10);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff);
+        this.scene.add(pointLight, ambientLight);
+    }
+
+    private initDebug() {
+        const gridHelper = new THREE.GridHelper(200, 50);
+        this.scene.add(gridHelper)
     }
 
     update() {
