@@ -1,0 +1,22 @@
+html,
+body,
+canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  position: fixed;
+  top : 0;
+  left : 0
+}
+
+canvas {
+ outline: none;
+}
+
+main{
+  position: absolute;
+  z-index: 99;
+  color: white;
+}
