@@ -5,8 +5,8 @@ import { Game } from '../Game/Game'
 
 
 export class Camera implements GameEntity {
-    public instance!: THREE.PerspectiveCamera
-    private controls!: OrbitControls
+    public instance!: THREE.PerspectiveCamera;
+    private controls!: OrbitControls;
 
     constructor(private game : Game){
         this.initCamera();

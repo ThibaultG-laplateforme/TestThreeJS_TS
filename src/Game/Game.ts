@@ -1,8 +1,9 @@
 import * as THREE from 'three'
 import { Camera } from '../Engine/Camera';
+import { Experience } from '../Engine/interface/Experience';
 
 
-export class Game {
+export class Game implements Experience {
     public readonly scene !: THREE.Scene;
     public readonly renderer !: THREE.WebGLRenderer;
     public readonly camera !: Camera;
@@ -19,12 +20,15 @@ export class Game {
         this.camera = new Camera(this);
         this.canvas = canvas;
 
+        this.init();
+
+        window.requestAnimationFrame(() => this.update())
+    }
+
+    init(){
         this.initObject();
         this.initLight();
         this.initDebug();
-
-
-        window.requestAnimationFrame(() => this.update())
     }
 
     private initObject() {
