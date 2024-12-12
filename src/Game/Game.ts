@@ -1,28 +1,24 @@
 import * as THREE from 'three'
 import { Camera } from '../Engine/Camera';
-import { Experience } from '../Engine/interface/Experience';
+import { IExperience } from '../Engine/interface/Experience';
+import { Engine } from '../Engine/Engine';
+import { Color } from '../Utils/Color';
 
 
-export class Game implements Experience {
-    public readonly scene !: THREE.Scene;
-    public readonly renderer !: THREE.WebGLRenderer;
+export class Game implements IExperience {
+    public readonly engine !: Engine;
+
+
     public readonly camera !: Camera;
-    public readonly canvas !: HTMLCanvasElement;
 
     public torus !:  THREE.Mesh;
 
-    constructor(canvas : HTMLCanvasElement){
-        this.scene = new THREE.Scene();
-        this.renderer = new THREE.WebGLRenderer({antialias : false, canvas : canvas})
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+    constructor(engine : Engine){
+        this.engine = engine;
 
         this.camera = new Camera(this);
-        this.canvas = canvas;
 
-        this.init();
-
-        window.requestAnimationFrame(() => this.update())
+        this.engine.scene.add(this.camera.instance);
     }
 
     init(){
@@ -36,10 +32,10 @@ export class Game implements Experience {
         const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 ); //Objet
         // Un MeshBasicMaterial est unlit
         // Un MeshStandardMaterial est lit
-        const material = new THREE.MeshStandardMaterial( { color: 0xffffff } ); //Shader
+        const material = new THREE.MeshStandardMaterial( { color: Color.WHITE } ); //Shader
         this.torus = new THREE.Mesh( geometry, material ); //composition de l'objet+shader
         // ---------------------
-        this.scene.add( this.torus ); //Ajout dans la scène en position  0, 0, 0
+        this.engine.scene.add( this.torus ); //Ajout dans la scène en position  0, 0, 0
     }
 
     private initLight(){
@@ -47,29 +43,24 @@ export class Game implements Experience {
         pointLight.position.set(10, 10, 10);
 
         const ambientLight = new THREE.AmbientLight(0xffffff);
-        this.scene.add(pointLight, ambientLight);
+        this.engine.scene.add(pointLight, ambientLight);
     }
 
     private initDebug() {
         const gridHelper = new THREE.GridHelper(200, 50);
-        this.scene.add(gridHelper)
+        this.engine.scene.add(gridHelper)
     }
 
-    update() {
-    const step = () => {
-        requestAnimationFrame(step)
-        //const elapsedTime = this.clock.getElapsedTime()
-        //this.deltaTime = elapsedTime - this.currentTime
-        //this.currentTime = elapsedTime
-        //this.engine.update(this.deltaTime)
+    update(deltaTime : number) {
 
-        this.camera.update(0);
-    
+        
+        this.camera.update(deltaTime);
+        
         this.torus.rotation.x += 0.01;
-    
-        this.renderer.render(this.scene, this.camera.instance);
-    }
-    step()
+        
+        if (this.engine.DebugLogMode >= 3) {
+            console.log("Experience Game was update !");
+        }
     }
 
 

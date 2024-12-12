@@ -1,8 +1,11 @@
 import { Camera } from "../Camera";
-import { GameEntity } from "./GameEntity";
+import { Engine } from "../Engine";
+import { IGameEntity } from "./GameEntity";
 
-
-export interface Experience extends GameEntity {
+export type TExperience = new (engine : Engine) => IExperience;
+export interface IExperience extends IGameEntity {
     camera : Camera;
+
+
     init() : void;
 } 

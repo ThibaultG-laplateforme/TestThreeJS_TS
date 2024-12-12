@@ -1,9 +1,9 @@
 import { WebGLRenderer } from 'three';
-import { GameEntity } from './interface/GameEntity';
+import { IGameEntity } from './interface/GameEntity';
 import { Engine } from './Engine';
 
-export class Renderer implements GameEntity{
-    private readonly renderer: WebGLRenderer
+export class Renderer implements IGameEntity{
+    public readonly renderer: WebGLRenderer
 
     constructor(private engine: Engine){
         this.renderer = new WebGLRenderer({
@@ -17,7 +17,15 @@ export class Renderer implements GameEntity{
     }
 
     update() {
-        //this.renderer.render(this.engine.scene, this.engine.camera);
+        this.renderer.render(
+            this.engine.scene, 
+            this.engine.experience.camera.instance
+        );
+
+        if (this.engine.DebugLogMode >= 3) {
+            console.log("Render Engine was update !");
+        }
+        
     }
 
     resize(): void {

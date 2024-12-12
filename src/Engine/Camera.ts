@@ -1,10 +1,10 @@
 import * as THREE from 'three'
-import { GameEntity } from './interface/GameEntity'
+import { IGameEntity } from './interface/GameEntity'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { Game } from '../Game/Game'
 
 
-export class Camera implements GameEntity {
+export class Camera implements IGameEntity {
     public instance!: THREE.PerspectiveCamera;
     private controls!: OrbitControls;
 
@@ -23,11 +23,10 @@ export class Camera implements GameEntity {
 
         this.instance.position.z = 30;
 
-        this.game.scene.add(this.instance);
     }
 
     private initControls() {
-        this.controls = new OrbitControls(this.instance, this.game.renderer.domElement);
+        this.controls = new OrbitControls(this.instance, this.game.engine.canvas);
     }
 
     public update(deltatime: number) {
