@@ -3,6 +3,7 @@ import { Camera } from '../Engine/Camera';
 import { IExperience } from '../Engine/interface/Experience';
 import { Engine } from '../Engine/Engine';
 import { Color } from '../Utils/Color';
+import { EnviroDemo } from './EnviroDemo';
 
 
 export class Game implements IExperience {
@@ -16,15 +17,17 @@ export class Game implements IExperience {
     constructor(engine : Engine){
         this.engine = engine;
 
-        this.camera = new Camera(this);
+        this.camera = new Camera(this, true);
 
         this.engine.scene.add(this.camera.instance);
     }
 
     init(){
+        let enviro = new EnviroDemo(this.engine.scene);
         this.initObject();
-        this.initLight();
         this.initDebug();
+
+        this.camera.SetPosition(10, 5, 30, true);
     }
 
     private initObject() {
@@ -38,13 +41,7 @@ export class Game implements IExperience {
         this.engine.scene.add( this.torus ); //Ajout dans la scène en position  0, 0, 0
     }
 
-    private initLight(){
-        const pointLight = new THREE.PointLight(0xff0000, 100, 200); // couleur, intensite, taille
-        pointLight.position.set(10, 10, 10);
 
-        const ambientLight = new THREE.AmbientLight(0xffffff);
-        this.engine.scene.add(pointLight, ambientLight);
-    }
 
     private initDebug() {
         const gridHelper = new THREE.GridHelper(200, 50);

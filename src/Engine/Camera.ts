@@ -8,9 +8,9 @@ export class Camera implements IGameEntity {
     public instance!: THREE.PerspectiveCamera;
     private controls!: OrbitControls;
 
-    constructor(private game : Game){
+    constructor(private game : Game, orbitalControls ?: boolean){
         this.initCamera();
-        this.initControls();
+        this.initControls(orbitalControls);
     }
 
     private initCamera(){
@@ -20,13 +20,21 @@ export class Camera implements IGameEntity {
             0.1, 
             1000
         )
-
-        this.instance.position.z = 30;
-
+    }
+    
+    private initControls(orbitalControls ?: boolean) {
+        if (orbitalControls) {
+            this.instance.position.z = 1;
+            this.controls = new OrbitControls(this.instance, this.game.engine.canvas);
+        }
     }
 
-    private initControls() {
-        this.controls = new OrbitControls(this.instance, this.game.engine.canvas);
+    public SetPosition(x : number, y : number = 0, z : number = 0, updateView : boolean = false){
+        this.instance.position.set(x, y, z);
+
+        if (updateView) {
+            this.instance.lookAt(new THREE.Vector3())
+        }
     }
 
     public update(deltatime: number) {
