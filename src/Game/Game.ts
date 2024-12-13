@@ -4,6 +4,7 @@ import { IExperience } from '../Engine/interface/Experience';
 import { Engine } from '../Engine/Engine';
 import { Color } from '../Utils/Color';
 import { EnviroDemo } from './EnviroDemo';
+import { SphereCube } from './SphereCube';
 
 
 export class Game implements IExperience {
@@ -26,6 +27,13 @@ export class Game implements IExperience {
         let enviro = new EnviroDemo(this.engine.scene);
         this.initObject();
         this.initDebug();
+
+        let a = new SphereCube();
+        this.engine.scene.add(a.mesh);
+        
+        
+
+        
 
         this.camera.SetPosition(10, 5, 30, true);
     }
