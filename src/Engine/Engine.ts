@@ -19,7 +19,7 @@ export class Engine {
         if (!canvas) {
             throw new Error("No canvas provided !");
         }
-        //this.timer = new THREE.Clock(true);
+        this.timer = new THREE.Clock(true);
         this.canvas = canvas;
         
         this.scene = new THREE.Scene();
@@ -43,10 +43,13 @@ export class Engine {
 
 
     private update() {
-        //let deltaTime = this.timer.getDelta();
+        let deltaTime = this.timer.getDelta();
     
         this.renderer.update();
-        this.experience.update(0);
+        this.experience.update(deltaTime);
     }
+
+    //TODO : Inscrire les event de chargement de ressources
+    //TODO : Lancer le update que quand les ressources sont charger
 
 }
