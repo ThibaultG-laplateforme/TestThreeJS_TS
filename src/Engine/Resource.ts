@@ -19,11 +19,12 @@ export class Resources extends EventEmitter {
     )
 
     private loaders !: TLoaders;
-    private itemLoad : Record<string, any> = {}
+    public readonly itemLoad : Record<string, any> = {}
     
     constructor(private readonly resources : TResource[]) {
         super();
         this.initLoaders();
+        this.load();
     }
 
     private initLoaders() {

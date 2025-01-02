@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { Renderer } from './Renderer';
 import { TExperience, IExperience } from './interface/Experience';
+import { Resources } from './Resource';
 
 
 export class Engine {
@@ -9,11 +10,13 @@ export class Engine {
     
     public readonly canvas !: HTMLCanvasElement;
     public readonly experience !: IExperience;
+    public readonly resources !: Resources;
 
     public readonly timer !: THREE.Clock;
 
     public readonly DebugLogMode = 1; // 0=null, 1=essential, 2=essential+, 3=All
 
+    private isLoaded : bool = false;
 
     constructor(canvas : HTMLCanvasElement, experience : TExperience) {
         if (!canvas) {
@@ -26,13 +29,24 @@ export class Engine {
         this.renderer = new Renderer(this);
 
         this.experience = new experience(this);
+        this.resources = new Resources(this.experience.resources);
+
+
+        this.resources.on('loaded', () => {
+            console.info("Resource is loaded sucessfully");
+            this.init();
+            this.isLoaded = true;
+        })
+        
+        this.resources.on('progress', (progress: number) => {
+            console.info(`Loading resources : ${progress}`);
+        })
+
+
 
         if (this.DebugLogMode >= 1) {
             console.log(this)
         }
-
-        this.init();
-
 
         this.renderer.renderer.setAnimationLoop( () => this.update() );
     }
@@ -43,6 +57,10 @@ export class Engine {
 
 
     private update() {
+        if (!this.isLoaded) {
+            return;
+        }
+        
         let deltaTime = this.timer.getDelta();
     
         this.renderer.update();

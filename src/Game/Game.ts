@@ -5,16 +5,18 @@ import { Engine } from '../Engine/Engine';
 import { EnviroDemo } from './EnviroDemo';
 import { SphereCube } from './SphereCube';
 import { TResource } from '../Engine/interface/Resource';
-
+import sources from './soures'
+import { Fox } from './Fox';
 
 export class Game implements IExperience {
     public readonly engine !: Engine;
     public readonly camera !: Camera;
     
-    public readonly resources !: TResource[];
+    public readonly resources : TResource[] = sources;
 
     public torus !:  THREE.Mesh;
     public sphereTest !: SphereCube;
+    public fox !: Fox;
 
     constructor(engine : Engine){
         this.engine = engine;
@@ -22,6 +24,8 @@ export class Game implements IExperience {
         this.camera = new Camera(this, true);
 
         this.engine.scene.add(this.camera.instance);
+
+    
     }
  
     init(){
@@ -32,10 +36,11 @@ export class Game implements IExperience {
         this.sphereTest = new SphereCube();
         this.engine.scene.add(this.sphereTest.mesh);
         
-        
+        this.fox = new Fox(this.engine.resources.itemLoad.foxModel)
+        this.engine.scene.add(this.fox.getModel());
 
-        
-
+        //this.fox.animation.play("running");
+       
         this.camera.SetPosition(10, 5, 30, true);
     }
 
@@ -65,6 +70,7 @@ export class Game implements IExperience {
         this.torus.rotation.x += 0.01;
 
         this.sphereTest.update(deltaTime);
+        this.fox.update(deltaTime);
 
         
         if (this.engine.DebugLogMode >= 3) {

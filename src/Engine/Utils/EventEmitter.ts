@@ -9,7 +9,7 @@ export class EventEmitter {
 
     public on(eventName : string, callBack : Function) {
 
-        eventName.replaceAll(/ /g, '')
+        //eventName.replaceAll(/ /g, '')
         if (eventName === '') {
             console.error("The event name was null !");
             return false;
@@ -20,13 +20,14 @@ export class EventEmitter {
             this.eventListener[eventName] = [];
         }
         this.eventListener[eventName].push(callBack);
+        console.log("The Event "+ eventName + " was create : " + this.eventListener[eventName])
         
         return true;
     }
 
     public off(eventName : string, callBack : Function) {
 
-        eventName.replaceAll(/ /g, '')
+        //eventName.replaceAll(/ /g, '')
         if (eventName === '') {
             console.error("The event name is null !");
             return false;
@@ -50,7 +51,7 @@ export class EventEmitter {
 
     public emit(eventName : string, ...args : any[]) {
 
-        eventName.replaceAll(/ /g, '')
+        //eventName.replaceAll(/ /g, '')
         if (eventName === '') {
             console.error("The event name is null !");
             return false;

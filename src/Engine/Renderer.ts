@@ -17,6 +17,7 @@ export class Renderer implements IGameEntity{
     }
 
     update() {
+        //console.log(this.engine.scene);
         this.renderer.render(
             this.engine.scene, 
             this.engine.experience.camera.instance
