@@ -1,4 +1,4 @@
-import { Camera } from "../Camera";
+import { Camera } from "../Camera/Camera";
 import { Engine } from "../Engine";
 import { IGameEntity } from "./GameEntity";
 import { TResource } from "./Resource";
@@ -10,5 +10,5 @@ export interface IExperience extends IGameEntity {
 
     resources : TResource[]
 
-    init() : void;
+    Init() : void;
 } 

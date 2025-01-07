@@ -9,20 +9,20 @@ export class DirtFloor {
 
 
     constructor(private resources : Resources){
-        this.init();
+        this.Init();
     }
 
-    init(){
-        this.setGeometry();
-        this.setMaterial();
-        this.setMesh();
+    Init(){
+        this.SetGeometry();
+        this.SetMaterial();
+        this.SetMesh();
     }
 
-    setGeometry(){
+    SetGeometry(){
         this.geometry = new THREE.CircleGeometry(20, 20);
     }
 
-    setMaterial(){
+    SetMaterial(){
         let groundTexture = {map : THREE.Texture, normal : THREE.Texture};
 
         groundTexture.map = this.resources.itemLoad.DirtColorTexture;
@@ -45,19 +45,19 @@ export class DirtFloor {
 
     }
 
-    setMesh(){
+    SetMesh(){
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.rotation.x = -Math.PI * 0.5;
         this.mesh.receiveShadow = true;
-        console.log('ready to display')
+        //console.log('ready to display')
     }
 
-    getMesh(){
+    GetMesh(){
         return this.mesh;
     }
 
-    setPosition(x: number, y: number, z: number): void {
-        this.mesh.position.set(x, y, z);
+    SetPosition(newPosition : THREE.Vector3): void {
+        this.mesh.position.set(newPosition.x, newPosition.y, newPosition.z);
     }
     
 }

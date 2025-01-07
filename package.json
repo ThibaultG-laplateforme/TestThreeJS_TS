@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "vite",
+    "start": "vite --port 5374",
     "build": "tsc && vite build"
   },
   "devDependencies": {

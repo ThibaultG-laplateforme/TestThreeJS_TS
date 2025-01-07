@@ -8,14 +8,14 @@ export class EnviroDemo implements IGameEntity {
     
 
     constructor(private engine : Engine){
-        this.init();
+        this.Init();
     }
 
 
-    init(){
+    Init(){
         this.engine.scene.fog = new THREE.Fog("black", 10, 500);
 
-        this.initLight();
+        this.InitLight();
 
         this.dirtGround = new DirtFloor(this.engine.resources);
         this.engine.scene.add(this.dirtGround.mesh);
@@ -23,7 +23,7 @@ export class EnviroDemo implements IGameEntity {
     }
 
 
-    private initLight(){
+    private InitLight(){
         const pointLight = new THREE.PointLight("green", 100, 200); // couleur, intensite, taille
         pointLight.position.set(10, 10, 10);
     
@@ -31,7 +31,7 @@ export class EnviroDemo implements IGameEntity {
         this.engine.scene.add(pointLight, ambientLight);
     }
     
-    update(deltatime: number): void {
+    Update(deltatime: number): void {
         
     }
 

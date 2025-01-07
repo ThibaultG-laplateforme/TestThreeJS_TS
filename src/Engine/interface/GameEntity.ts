@@ -1,6 +1,12 @@
+
 export interface IGameEntity {
-    update(deltatime: number): void
-    resize?(): void
+    Init() : void
+    Update(deltatime: number): void;
+
+    OnDestroy?() : void;
+
+    Resize?(): void;
 }
+
 
 

@@ -8,11 +8,15 @@ export class Fox implements IGameObject {
     
     constructor(public readonly resource : any  ){
         //console.log(resource)
-        this.setModel();
-        this.setAnimation();
+        this.Init();
+    }
+    
+    Init() {
+        this.SetModel();
+        this.SetAnimation();
     }
 
-    private setModel() {
+    private SetModel() {
         this.model = this.resource.scene;
         this.model.scale.set(0.2, 0.2, 0.2);
         this.model.traverse((child) => {
@@ -23,19 +27,16 @@ export class Fox implements IGameObject {
         //console.log(this.model)
     }
 
-    public getModel(){
+    public GetModel(){
         return this.model;
     }
 
-    init(){
 
-    }
-
-    update(deltatime: number): void {
+    Update(deltatime: number): void {
         this.animation.mixer.update(deltatime )
     }
 
-    setAnimation() {
+    SetAnimation() {
         
         this.animation.mixer = new THREE.AnimationMixer(this.model)
     
@@ -63,8 +64,8 @@ export class Fox implements IGameObject {
         //console.log(this.animation)
     }
 
-    setPosition(x: number, y: number, z: number): void {
-        this.model.position.set(x, y, z);
+    SetPosition(newPosition : THREE.Vector3): void {
+        this.model.position.set(newPosition.x, newPosition.y, newPosition.z);
     }
 
 }

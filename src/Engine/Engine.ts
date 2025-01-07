@@ -16,7 +16,7 @@ export class Engine {
 
     public readonly DebugLogMode = 1; // 0=null, 1=essential, 2=essential+, 3=All
 
-    private isLoaded : bool = false;
+    private isLoaded : boolean = false;
 
     constructor(canvas : HTMLCanvasElement, experience : TExperience) {
         if (!canvas) {
@@ -32,13 +32,13 @@ export class Engine {
         this.resources = new Resources(this.experience.resources);
 
 
-        this.resources.on('loaded', () => {
+        this.resources.On('loaded', () => {
             console.info("Resource is loaded sucessfully");
-            this.init();
+            this.Init();
             this.isLoaded = true;
         })
         
-        this.resources.on('progress', (progress: number, url: string) => {
+        this.resources.On('progress', (progress: number, url: string) => {
             console.info(`Loading resources : ${progress} => ${url}`);
         })
 
@@ -48,23 +48,23 @@ export class Engine {
             console.log(this)
         }
 
-        this.renderer.renderer.setAnimationLoop( () => this.update() );
+        this.renderer.renderer.setAnimationLoop( () => this.Update() );
     }
 
-    private init() {
-        this.experience.init();
+    private Init() {
+        this.experience.Init();
     }
 
 
-    private update() {
+    private Update() {
         if (!this.isLoaded) {
             return;
         }
         
         let deltaTime = this.timer.getDelta();
     
-        this.renderer.update();
-        this.experience.update(deltaTime);
+        this.renderer.Update();
+        this.experience.Update(deltaTime);
     }
 
     //TODO : Inscrire les event de chargement de ressources

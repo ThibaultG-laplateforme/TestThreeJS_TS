@@ -10,13 +10,15 @@ export class Renderer implements IGameEntity{
             canvas: this.engine.canvas,
             antialias: false,
         })
-
+        this.Init();
+    }
+    
+    Init() {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-  
     }
 
-    update() {
+    Update() {
         //console.log(this.engine.scene);
         this.renderer.render(
             this.engine.scene, 
@@ -29,7 +31,7 @@ export class Renderer implements IGameEntity{
         
     }
 
-    resize(): void {
+    Resize() {
         
     }
 }

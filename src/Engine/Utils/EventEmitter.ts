@@ -2,12 +2,12 @@ export class EventEmitter {
     private eventListener : {[key : string] : Function[]} = {}
 
     
-    protected eventListenerCount(eventName: string) {
+    protected EventListenerCount(eventName: string) {
         return this.eventListener[eventName] ? this.eventListener[eventName].length : 0
     }
 
 
-    public on(eventName : string, callBack : Function) {
+    public On(eventName : string, callBack : Function) {
 
         //eventName.replaceAll(/ /g, '')
         if (eventName === '') {
@@ -25,7 +25,7 @@ export class EventEmitter {
         return true;
     }
 
-    public off(eventName : string, callBack : Function) {
+    public Off(eventName : string, callBack : Function) {
 
         //eventName.replaceAll(/ /g, '')
         if (eventName === '') {
@@ -49,7 +49,7 @@ export class EventEmitter {
         return true;
     }
 
-    public emit(eventName : string, ...args : any[]) {
+    public Emit(eventName : string, ...args : any[]) {
 
         //eventName.replaceAll(/ /g, '')
         if (eventName === '') {

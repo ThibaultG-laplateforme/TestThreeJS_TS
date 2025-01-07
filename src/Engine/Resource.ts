@@ -8,10 +8,10 @@ export class Resources extends EventEmitter {
 
     private loadingManager = new THREE.LoadingManager(
         () => {
-          this.emit('loaded')
+          this.Emit('loaded')
         },
         (url: string, item: number, total: number) => {
-          this.emit('progress', item / total, url)
+          this.Emit('progress', item / total, url)
         },
         (url: string) => {
           console.error(`Failed to load ${url}`)
@@ -23,11 +23,11 @@ export class Resources extends EventEmitter {
     
     constructor(private readonly resources : TResource[]) {
         super();
-        this.initLoaders();
-        this.load();
+        this.InitLoaders();
+        this.Load();
     }
 
-    private initLoaders() {
+    private InitLoaders() {
         this.loaders = {
           gltf: new GLTFLoader(this.loadingManager),
           texture: new THREE.TextureLoader(this.loadingManager),
@@ -35,9 +35,9 @@ export class Resources extends EventEmitter {
         }
     }
 
-    private load() {
+    private Load() {
         if (this.resources.length === 0) {
-            this.emit('loaded');
+            this.Emit('loaded');
             return;
         }
 

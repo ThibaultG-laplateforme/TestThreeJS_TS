@@ -10,11 +10,11 @@ export class SphereCube implements IGameObject {
     private time !: number;
 
     constructor(){
-        this.init();
+        this.Init();
         this.time = 0;
     }
 
-    init() {
+    Init() {
 
         this.geometry = new THREE.SphereGeometry(1, 32, 32);
         this.material = new THREE.MeshStandardMaterial({color : "blue"})
@@ -28,11 +28,11 @@ export class SphereCube implements IGameObject {
         
     }
 
-    update(deltatime: number): void {
+    Update(deltatime: number): void {
         this.time += deltatime;
-        this.mesh.position.x = Math.cos(this.time * 1) * 3;  //cos(temps * frequence) * amplitude
+        this.mesh.position.x = (Math.cos(this.time * 1) * 3) -100;  //cos(temps * frequence) * amplitude
         //if(this.time > 3*2) this.time = 0; // 1 aller retour = amplitude * 2
-
+ 
     }
     
 }
