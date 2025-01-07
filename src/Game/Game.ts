@@ -10,7 +10,7 @@ import { Fox } from './Fox';
 
 export class Game implements IExperience {
     public readonly engine !: Engine;
-    public readonly camera !: Camera;
+    public  camera !: Camera;
     
     public readonly resources : TResource[] = sources;
 
@@ -20,16 +20,10 @@ export class Game implements IExperience {
 
     constructor(engine : Engine){
         this.engine = engine;
-
-        this.camera = new Camera(this, true);
-
-        this.engine.scene.add(this.camera.instance);
-
-    
     }
  
     init(){
-        let enviro = new EnviroDemo(this.engine.scene);
+        let enviro = new EnviroDemo(this.engine);
         this.initObject();
         this.initDebug();
 
@@ -39,8 +33,20 @@ export class Game implements IExperience {
         this.fox = new Fox(this.engine.resources.itemLoad.foxModel)
         this.engine.scene.add(this.fox.getModel());
 
+        this.fox.setPosition(-50, 0, 0);
+        enviro.dirtGround.setPosition(-50, 0, 0);
+
+
         //this.fox.animation.play("running");
-       
+        this.initCamera();
+    }
+    
+    private initCamera() {
+        this.camera = new Camera(this, true);
+        
+        this.engine.scene.add(this.camera.instance);
+
+
         this.camera.SetPosition(10, 5, 30, true);
     }
 

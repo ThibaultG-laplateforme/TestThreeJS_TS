@@ -15,12 +15,12 @@ export class EventEmitter {
             return false;
         }
 
-        console.log("event associate : " + this.eventListener[eventName])
+        //console.log("event associate : " + this.eventListener[eventName])
         if (!this.eventListener[eventName]){
             this.eventListener[eventName] = [];
         }
         this.eventListener[eventName].push(callBack);
-        console.log("The Event "+ eventName + " was create : " + this.eventListener[eventName])
+        //console.log("The Event "+ eventName + " was create : " + this.eventListener[eventName])
         
         return true;
     }

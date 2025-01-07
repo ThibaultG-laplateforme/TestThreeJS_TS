@@ -38,8 +38,8 @@ export class Engine {
             this.isLoaded = true;
         })
         
-        this.resources.on('progress', (progress: number) => {
-            console.info(`Loading resources : ${progress}`);
+        this.resources.on('progress', (progress: number, url: string) => {
+            console.info(`Loading resources : ${progress} => ${url}`);
         })
 
 

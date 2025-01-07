@@ -11,7 +11,7 @@ export class Resources extends EventEmitter {
           this.emit('loaded')
         },
         (url: string, item: number, total: number) => {
-          this.emit('progress', item / total)
+          this.emit('progress', item / total, url)
         },
         (url: string) => {
           console.error(`Failed to load ${url}`)

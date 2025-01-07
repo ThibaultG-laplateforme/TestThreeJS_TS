@@ -20,7 +20,7 @@ export class Fox implements IGameObject {
               child.castShadow = true
             }
         })
-        console.log(this.model)
+        //console.log(this.model)
     }
 
     public getModel(){
@@ -60,7 +60,11 @@ export class Fox implements IGameObject {
           // we can test it in the console by writing 
           // window.experience.world.fox.animation.play('walking')
         }
-        console.log(this.animation)
+        //console.log(this.animation)
+    }
+
+    setPosition(x: number, y: number, z: number): void {
+        this.model.position.set(x, y, z);
     }
 
 }
