@@ -1,10 +1,8 @@
 import { IComponent } from "../interface/Component";
-import { IGameObject } from "../interface/GameObject";
-import { ILinkable, TLinkable } from "../interface/Linkable";
 import { EventEmitter } from "../Utils/EventEmitter";
 import { GameObject } from "./GameObject";
 
-export class Component extends EventEmitter implements IComponent {
+export default class Component extends EventEmitter implements IComponent {
     
     private _parent : GameObject | null = null;
     
@@ -13,6 +11,10 @@ export class Component extends EventEmitter implements IComponent {
     }
 
     Init(): void {
+        
+    }
+
+    Start(): void {
         
     }
 
@@ -26,5 +28,9 @@ export class Component extends EventEmitter implements IComponent {
 
     GetParent(): GameObject | null {
         return this._parent;
+    }
+
+    OnDestroy(): void {
+        
     }
 }

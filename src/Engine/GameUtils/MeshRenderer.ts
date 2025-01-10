@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Component } from "./Component";
+import Component from "./Component";
 
 export default class MeshRenderer extends Component {
     private _renderer !: THREE.Object3D;
@@ -25,46 +25,38 @@ export default class MeshRenderer extends Component {
     }
 
     private UpdatePosition(newPosition : THREE.Vector3 | undefined): void {
-
-        if (!newPosition) {
-            console.error(`(${this.GetParent()?.name}) Renderer position was undefined`)
-            return;
-        }
-        if (!this.CheckIfRendererIsValid()) {
+        if (!this.CheckIfRendererIsValid(newPosition, 'position')) {
             return;
         }
         
         this._renderer.position.copy(newPosition);
-        console.log(`Mesh position is update !`);
+        //console.log(`(${this.GetParent()?.name}) Mesh position is update !`);
     }
     
     private UpdateQuaternion(newQuaternion : THREE.Quaternion | undefined): void {
-        if (!newQuaternion) {
-            console.error(`(${this.GetParent()?.name}) Renderer quaternion was undefined`)
-            return;
-        }
-        if (!this.CheckIfRendererIsValid()) {
+        if (!this.CheckIfRendererIsValid(newQuaternion, 'quaternion')) {
             return;
         }
         
         this._renderer.quaternion.copy(newQuaternion);
-        console.log(`Mesh rotation is update !`);
+        //console.log(`(${this.GetParent()?.name}) Mesh rotation is update !`);
     }
     
     private UpdateScale(newScale : THREE.Vector3 | undefined): void {
-        if (!newScale) {
-            console.error(`(${this.GetParent()?.name}) Renderer scale was undefined`)
-            return;
-        }
-        if (!this.CheckIfRendererIsValid()) {
+        if (!this.CheckIfRendererIsValid(newScale, 'scale')) {
             return;
         }
 
         this._renderer.scale.copy(newScale);
-        console.log(`Mesh scale is update !`);
+        //console.log(`(${this.GetParent()?.name}) Mesh scale is update !`);
     }
 
-    private CheckIfRendererIsValid() : boolean {
+    private CheckIfRendererIsValid(valueToCheck : THREE.Vector3 | THREE.Quaternion | undefined, type : 'position'| 'quaternion' | 'scale') : boolean {
+        if (!valueToCheck) {
+            console.error(`(${this.GetParent()?.name}) Renderer ${type} was undefined`)
+            return false;
+        }
+
         if (!this._renderer) {
             console.error(`(${this.GetParent()?.name}) Renderer is not valid !`)
             return false;
@@ -87,5 +79,10 @@ export default class MeshRenderer extends Component {
     GetRenderer() : THREE.Object3D {
         return this._renderer;
     }
+
+    OnDestroy(): void {
+        this._renderer.parent?.remove(this._renderer)
+    }
+
     
 }

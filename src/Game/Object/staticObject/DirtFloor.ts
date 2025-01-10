@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Resources } from '../../Engine/Resource';
+import { Resources } from '../../../Engine/Resource';
 
 
 export class DirtFloor {

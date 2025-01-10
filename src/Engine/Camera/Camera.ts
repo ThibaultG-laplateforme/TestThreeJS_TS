@@ -16,7 +16,7 @@ export class Camera implements IGameEntity {
 
     constructor(private game : Game, orbitalControls ?: boolean){
         this.Init();
-        //this.initControls(orbitalControls);
+        this.InitControls(orbitalControls);
     }
 
     Init(){

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { IGameEntity } from '../Engine/interface/GameEntity';
 import { Engine } from '../Engine/Engine';
-import { DirtFloor } from './staticObject/DirtFloor';
+import { DirtFloor } from './Object/staticObject/DirtFloor';
 
 export class EnviroDemo implements IGameEntity {
     dirtGround !: DirtFloor 

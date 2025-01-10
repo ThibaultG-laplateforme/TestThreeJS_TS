@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Component } from "./Component";
+import Component from "./Component";
 
 export default class Transform extends Component {
     readonly position : THREE.Vector3;
@@ -35,7 +35,7 @@ export default class Transform extends Component {
     SetScaler(newScale : THREE.Vector3) : void {
         this.scaler.copy(newScale);
 
-        this.GetParent()?.Emit('update.scale');
+        this.GetParent()?.Emit('update.scale', this.scaler);
     }
 
 
