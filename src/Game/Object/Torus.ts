@@ -18,9 +18,8 @@ export default class Torus extends GameObject {
 
     Update(deltatime: number): void {
         super.Update(deltatime);
-        
-        //TODO: regarder les rotations
 
+        this.transform.AddRotation(-10 * deltatime,0,0)
     }
 
 

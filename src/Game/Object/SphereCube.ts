@@ -46,7 +46,7 @@ export class SphereCube extends GameObject {
         
 
         this.time += deltatime;
-        this.transform.SetPosition(new THREE.Vector3((Math.cos(this.time * 1) * 3) -100, 0, 0));  //cos(temps * frequence) * amplitude
+        this.transform.SetPosition((Math.cos(this.time * 1) * 3) - 100, 0, 0);  //cos(temps * frequence) * amplitude
         //if(this.time > 3*2) this.time = 0; // 1 aller retour = amplitude * 2
  
     }

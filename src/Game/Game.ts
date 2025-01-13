@@ -20,10 +20,6 @@ export class Game implements IExperience {
     
     public readonly resources : TResource[] = sources;
 
-    public torus !:  THREE.Mesh;
-    public sphereTest !: SphereCube;
-
-    public squareTest !: GameObject;
 
     constructor(engine : Engine){
         this.engine = engine;
@@ -38,17 +34,22 @@ export class Game implements IExperience {
         let enviro = new EnviroDemo(this.engine);
         this.InitDebug();
 
-        this.sphereTest = new SphereCube();
-        this._gameObjectManager.Add(this.sphereTest,"sphere");
-        this.sphereTest.Start();
-        let r = this.sphereTest.GetComponent(MeshRenderer)?.GetRenderer();
+        const sphereTest = new SphereCube();
+        this._gameObjectManager.Add(sphereTest,"sphere");
+        sphereTest.Start();
+        let r = sphereTest.GetComponent(MeshRenderer)?.GetRenderer();
         if (r) {
             this.engine.scene.add(r);
         }
         
+        // TODO: Revoir hierarchie + fonctionnement de création des GO
+        // TODO: Voir comment faire des singletons
+        // TODO: Automatiser l'ajout au GOManager
+        // TODO: Automatiser l'ajout des mesh a la scene 
+        // TODO: Gerer la déactivation des componants/GO
 
 
-        let fox = new Fox(this.engine.resources.itemLoad.foxModel)
+        const fox = new Fox(this.engine.resources.itemLoad.foxModel)
         this._gameObjectManager.Add(fox,"fox");
         fox.Start();
         this.engine.scene.add(fox.GetModel());
@@ -60,42 +61,11 @@ export class Game implements IExperience {
         if (r) {
             this.engine.scene.add(r);
         }
-        torus.transform.SetPosition(new THREE.Vector3(0, 0, 50));
+        torus.transform.SetPosition(-100, 0, 0);
 
 
 
-        //console.log(this.fox.constructor.name) // print "fox"
-
-        //this.fox.SetPosition(new THREE.Vector3(-50, 0, 0));
         enviro.dirtGround.SetPosition(new THREE.Vector3(-50, 0, 0));
-
-        //let objgroup = new THREE.Group();
-        //objgroup.add(this.fox.GetModel(), this.camera.instance);
-
-        //objgroup.position.y = 10;
-        //this.engine.scene.add(objgroup);
-
-
-        //this.camera.instance.position.copy(this.fox.GetModel().position);
-        //let newPosition = this.fox.GetModel().position;
-        //newPosition.y += 10;
-        //this.camera.instance.lookAt(newPosition);
-        
-        // this.squareTest = new GameObject();
-        // let meshComp = new MeshRenderer();
-        // console.log(this.engine.resources.itemLoad.foxModel);
-        
-        // meshComp.SetRenderer(this.engine.resources.itemLoad.foxModel.scene);
-
-
-        // this.squareTest.AddComponent(meshComp)
-        // this.squareTest.transform.SetPosition(new THREE.Vector3(100,1,5));
-        // console.log(this.squareTest.transform.position);
-
-        // this.engine.scene.add(meshComp.GetRenderer());
-
-
-
         
         //this.fox.animation.play("running");
     }
@@ -105,7 +75,7 @@ export class Game implements IExperience {
         
         this.engine.scene.add(this.camera.instance);
 
-        this.camera.SetPosition(10, 5, 30);
+        this.camera.SetPosition(20, 5, 0);
     }
 
     private InitDebug() {

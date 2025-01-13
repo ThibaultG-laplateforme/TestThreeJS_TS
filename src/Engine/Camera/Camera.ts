@@ -3,6 +3,7 @@ import { IGameEntity } from '../interface/GameEntity'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { Game } from '../../Game/Game'
 import { IGameObject } from '../interface/GameObject';
+import { IExperience } from '../interface/Experience';
 
 
 export class Camera implements IGameEntity {
@@ -14,7 +15,7 @@ export class Camera implements IGameEntity {
 
     private _target !: THREE.Mesh;
 
-    constructor(private game : Game, orbitalControls ?: boolean){
+    constructor(private game : IExperience, orbitalControls ?: boolean){
         this.Init();
         this.InitControls(orbitalControls);
     }
@@ -30,7 +31,7 @@ export class Camera implements IGameEntity {
     
     private InitControls(orbitalControls ?: boolean) {
         if (orbitalControls) {
-            this.instance.position.z = 1;
+            this.instance.position.x = 1;
             this.controls = new OrbitControls(this.instance, this.game.engine.canvas);
         }
     }

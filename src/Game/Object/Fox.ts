@@ -16,6 +16,8 @@ export class Fox extends GameObject {
     Start() {
         this.SetModel();
         this.SetAnimation();
+
+        this.transform.SetRotation(0, 0, 0);
     }
 
     private SetModel() {
@@ -32,7 +34,7 @@ export class Fox extends GameObject {
         meshRenderer.SetRenderer(model);
 
         this.transform.SetScaler(new THREE.Vector3(0.2, 0.2, 0.2));
-
+        //this.transform.SetPosition(0, 0, 0);
     }
 
     public GetModel() : THREE.Object3D {
@@ -43,7 +45,11 @@ export class Fox extends GameObject {
 
     Update(deltatime: number): void {
         super.Update(deltatime);
-        this.animation.mixer.update(deltatime )
+        this.animation.mixer.update(deltatime)
+
+        //let dir = this.transform.direction;
+        //this.transform.AddVecteurPosition(dir.forward, 20*deltatime);
+        //this.transform.AddRotation(90 * deltatime, 0, 0);
     }
 
     SetAnimation() {
