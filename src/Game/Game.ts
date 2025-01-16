@@ -7,7 +7,6 @@ import { SphereCube } from './Object/SphereCube';
 import { TResource } from '../Engine/interface/Resource';
 import sources from './soures'
 import { Fox } from './Object/Fox';
-import GameObject from '../Engine/GameUtils/GameObject';
 import GameObjectManager from '../Engine/GameUtils/GameObjectManager';
 import MeshRenderer from '../Engine/GameUtils/MeshRenderer';
 import Torus from './Object/Torus';

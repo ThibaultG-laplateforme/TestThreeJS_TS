@@ -7,7 +7,7 @@ import { IExperience } from '../interface/Experience';
 
 
 export class Camera implements IGameEntity {
-    public instance!: THREE.Camera;
+    public instance!: THREE.PerspectiveCamera;
     private controls!: OrbitControls;
 
     private _currentPosition : THREE.Vector3 = new THREE.Vector3();
@@ -53,6 +53,7 @@ export class Camera implements IGameEntity {
     }
 
     public Resize() {
-        
+        this.instance.aspect = window.innerWidth / window.innerHeight;
+        this.instance.updateProjectionMatrix();
     }
 }

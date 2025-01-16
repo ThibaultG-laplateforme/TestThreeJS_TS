@@ -4,13 +4,14 @@
     "build": "tsc && vite build"
   },
   "devDependencies": {
+    "cannon-es-debugger": "^1.0.0",
     "@types/three": "^0.170.0",
     "sass": "^1.82.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.3"
   },
   "dependencies": {
-    "cannon": "^0.6.2",
+    "cannon-es": "^0.20.0",
     "three": "^0.171.0"
   }
 }

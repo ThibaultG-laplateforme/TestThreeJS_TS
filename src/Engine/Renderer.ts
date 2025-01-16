@@ -32,6 +32,6 @@ export class Renderer implements IGameEntity{
     }
 
     Resize() {
-        
+        this.renderer.setSize(window.innerWidth, window.innerHeight)
     }
 }

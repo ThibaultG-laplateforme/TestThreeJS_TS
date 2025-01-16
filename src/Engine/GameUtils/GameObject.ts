@@ -60,7 +60,7 @@ export default class GameObject extends EventEmitter implements IGameObject {
 //#endregion
 
 //#region Component
-    GetComponent<T>(componentClass: new () => T): T | null {
+    GetComponent<T>(componentClass: new ({...args}) => T): T | null {
         let component = this._components[componentClass.name];
         if (component === undefined) {
             console.error(`${this.name} don't have ${name} (component)`)

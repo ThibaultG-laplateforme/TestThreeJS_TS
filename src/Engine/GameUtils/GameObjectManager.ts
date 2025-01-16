@@ -2,7 +2,6 @@ import { IGameEntity } from "../interface/GameEntity";
 import GameObject from "./GameObject";
 
 export default class GameObjectManager implements IGameEntity {
-    // TODO: make GOManager
     private ids : number = 0;
     private gameObjects : Record<string, GameObject> = {}
     
