@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import GameObject from '../../Engine/GameUtils/GameObject';
 import MeshRenderer from '../../Engine/GameUtils/MeshRenderer';
 import InputController from '../../Engine/GameUtils/InputController';
+import PlayerController from '../Component/PlayerController';
+import PlayerMovement from '../Component/PlayerMovement';
 
 export class Fox extends GameObject {
     public readonly resource : any;
@@ -17,15 +19,11 @@ export class Fox extends GameObject {
     Start() {
         this.SetModel();
         this.SetAnimation();
-
-        const i = new InputController();
-        i.SetKeyTable(["a","z","n"])
-        i.AddInKeyTable("w");
-        i.RemoveInKeyTable('a')
-        this.AddComponent(i);
-
-
+        
         this.transform.SetRotation(0, 0, 0);
+        this.AddComponent(new PlayerMovement());
+
+
     }
 
     private SetModel() {

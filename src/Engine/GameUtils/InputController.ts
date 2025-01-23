@@ -47,8 +47,8 @@ export default class InputController extends Component {
     }
 
     protected UpdateKeyTable(key : KeyboardEvent, isDown : boolean){
-        if (this.keys[key.key] === undefined) {
             console.log(key.key + ' key is not register')
+        if (!this.CheckIfRegister(key.key)) {
             return;
         }
         this.keys[key.key] = isDown;
@@ -58,6 +58,22 @@ export default class InputController extends Component {
     }
     
     OnKeyUp(key : KeyboardEvent) {
+    }
+
+    GetKey(key : string): boolean | undefined {
+        if (!this.CheckIfRegister(key)) {
+            return undefined;
+        }
+
+        return this.keys[key];
+    }
+    
+    private CheckIfRegister(key : string) {
+        if (this.keys[key] === undefined) {
+            console.warn(key + ' key is not register')
+            return false;
+        }
+        return true;
     }
 //#endregion
 

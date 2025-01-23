@@ -2,17 +2,14 @@ import * as THREE from 'three'
 import Component from "./Component";
 import { Vector3 } from '../Utils/Vector';
 import { DegreesToRadians } from '../Utils/Math';
+import { IDirection } from '../interface/Component';
 
 export default class Transform extends Component {
     readonly position : THREE.Vector3;
     readonly quaternion : THREE.Quaternion;
     readonly scaler : THREE.Vector3;
 
-    readonly direction : any = {
-        forward : THREE.Vector3,
-        right : THREE.Vector3,
-        top : THREE.Vector3
-    }
+    readonly direction : IDirection;
     
     constructor() {
         super();
