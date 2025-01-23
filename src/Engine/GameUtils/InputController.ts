@@ -47,7 +47,6 @@ export default class InputController extends Component {
     }
 
     protected UpdateKeyTable(key : KeyboardEvent, isDown : boolean){
-            console.log(key.key + ' key is not register')
         if (!this.CheckIfRegister(key.key)) {
             return;
         }
