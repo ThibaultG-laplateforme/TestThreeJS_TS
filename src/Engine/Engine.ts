@@ -21,8 +21,6 @@ export class Engine {
 
     public readonly timer !: THREE.Clock;
 
-    public readonly DebugLogMode = 1; // 0=null, 1=essential, 2=essential+, 3=All
-
     private isLoaded : boolean = false;
 
     public cannonDebugger !: any
@@ -55,18 +53,12 @@ export class Engine {
             console.info(`Loading resources : ${progress} => ${url}`);
         })
 
-        
-
-        if (this.DebugLogMode >= 1) {
-            console.log(this)
-        }
-
         this.renderer.renderer.setAnimationLoop( () => this.Update() );
     }
 
     private Init() {
         this.experience.Init();
-        window.addEventListener('resize', () => this.Resize, false);
+        window.addEventListener('resize', () => {this.Resize()}, false);
     }
 
 
@@ -84,7 +76,6 @@ export class Engine {
     }
 
     Resize() {
-        console.log(this)
         this.experience.camera.Resize();
         this.renderer.Resize();
     }

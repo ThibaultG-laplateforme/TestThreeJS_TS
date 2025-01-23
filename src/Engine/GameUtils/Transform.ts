@@ -52,13 +52,15 @@ export default class Transform extends Component {
 
     AddVecteurPosition(direction : THREE.Vector3, distance : number = 0) {
         distance = distance === 0 ? 1 : distance;
-
+        
         const newPos = this.GetPosition();
         newPos.x += direction.x * distance;
         newPos.y += direction.y * distance;
         newPos.z += direction.z * distance;
         
+        
         this.SetVecteurPosition(newPos);
+        
     }
 //#endregion
 

@@ -25,10 +25,6 @@ export class Renderer implements IGameEntity{
             this.engine.experience.camera.instance
         );
 
-        if (this.engine.DebugLogMode >= 3) {
-            console.log("Render Engine was update !");
-        }
-        
     }
 
     Resize() {

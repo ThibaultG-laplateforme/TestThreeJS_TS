@@ -5,6 +5,8 @@ import PlayerController from "./PlayerController";
 
 export default class PlayerMovement extends Component {
     private controller !: PlayerController
+
+    private speed : number = 100;
     
     constructor(){
         super()
@@ -31,16 +33,24 @@ export default class PlayerMovement extends Component {
             return;
         }
 
+        const distance = this.speed * deltatime; 
+        let currentVec = new Vector3();
 
         if(this.controller.GetKey(this.controller.movementKey.forward)){
-            const currentVec = this.GetParent().transform.direction.forward;
-            
-            
-
-            console.log();
-            
-            //sthis.GetParent().transform.AddVecteurPosition(vec);
+            currentVec.add(this.GetParent().transform.direction.forward as Vector3);
         }
+        if(this.controller.GetKey(this.controller.movementKey.backward)){
+            currentVec.sub(this.GetParent().transform.direction.forward as Vector3);
+        }
+
+        if(this.controller.GetKey(this.controller.movementKey.left)){
+            currentVec.sub(this.GetParent().transform.direction.right as Vector3);
+        }
+        if(this.controller.GetKey(this.controller.movementKey.right)){
+            currentVec.add(this.GetParent().transform.direction.right as Vector3);
+        }
+
+        this.GetParent().transform.AddVecteurPosition(currentVec.normalize(), distance);
     }
 
 }

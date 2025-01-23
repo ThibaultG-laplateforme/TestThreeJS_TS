@@ -21,7 +21,7 @@ export default class InputController extends Component {
         for (const key in newTable) {
             this.keys[newTable[key]] = false;
         }
-        console.log(this.keys)
+        //console.log(this.keys)
     }
 
     AddInKeyTable(keys : string | string[]) {

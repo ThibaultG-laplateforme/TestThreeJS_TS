@@ -52,4 +52,9 @@ export default class RigidBody extends Component {
         this.GetParent()?.Emit('update.rotation', this.body.quaternion);
     }
 
+    Impulse(direction: Vector3, force : number ){
+        direction = direction.multiplyScalar(force);
+        this.body.velocity.vadd(new CANNON.Vec3(direction.x, direction.y, direction.z));
+    }
+
 }

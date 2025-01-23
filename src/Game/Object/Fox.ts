@@ -22,8 +22,6 @@ export class Fox extends GameObject {
         
         this.transform.SetRotation(0, 0, 0);
         this.AddComponent(new PlayerMovement());
-
-
     }
 
     private SetModel() {
@@ -40,7 +38,6 @@ export class Fox extends GameObject {
         meshRenderer.SetRenderer(model);
 
         this.transform.SetScaler(new THREE.Vector3(0.2, 0.2, 0.2));
-        //this.transform.SetPosition(0, 0, 0);
     }
 
     public GetModel() : THREE.Object3D {

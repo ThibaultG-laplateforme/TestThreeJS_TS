@@ -34,8 +34,6 @@ export default class GameObjectManager implements IGameEntity {
 
         delete this.gameObjects[name];
 
-        console.log(go);
-
         return go;
     }
 
