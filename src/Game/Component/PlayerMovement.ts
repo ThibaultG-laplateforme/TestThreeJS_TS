@@ -34,23 +34,32 @@ export default class PlayerMovement extends Component {
         }
 
         const distance = this.speed * deltatime; 
-        let currentVec = new Vector3();
+        let currentPosVec = new Vector3();
 
         if(this.controller.GetKey(this.controller.movementKey.forward)){
-            currentVec.add(this.GetParent().transform.direction.forward as Vector3);
+            currentPosVec.add(this.GetParent().transform.direction.forward as Vector3);
         }
         if(this.controller.GetKey(this.controller.movementKey.backward)){
-            currentVec.sub(this.GetParent().transform.direction.forward as Vector3);
+            currentPosVec.sub(this.GetParent().transform.direction.forward as Vector3);
         }
 
         if(this.controller.GetKey(this.controller.movementKey.left)){
-            currentVec.sub(this.GetParent().transform.direction.right as Vector3);
+            currentPosVec.sub(this.GetParent().transform.direction.right as Vector3);
         }
         if(this.controller.GetKey(this.controller.movementKey.right)){
-            currentVec.add(this.GetParent().transform.direction.right as Vector3);
+            currentPosVec.add(this.GetParent().transform.direction.right as Vector3);
         }
 
-        this.GetParent().transform.AddVecteurPosition(currentVec.normalize(), distance);
+        this.GetParent().transform.AddVecteurPosition(currentPosVec.normalize(), distance);
+
+        let currentRotVec = new Vector3()
+        if (this.controller.GetKey(this.controller.movementKey.rotateLeft)) {
+            currentRotVec.add(new Vector3(0, 2, 0))
+        }
+        if (this.controller.GetKey(this.controller.movementKey.rotateRight)) {
+            currentRotVec.sub(new Vector3(0, 2, 0))
+        }
+        this.GetParent().transform.AddRotation(currentRotVec.x, currentRotVec.y, currentRotVec.z);
     }
 
 }

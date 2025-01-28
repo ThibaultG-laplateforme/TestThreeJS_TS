@@ -12,7 +12,10 @@ export default class PlayerController extends InputController {
             backward : "s",
             left : "q",
             right : "d",
-            jump : " "
+            jump : " ",
+
+            rotateLeft : "a",
+            rotateRight : "e"
         }
     
         this.SetKeyTable([
@@ -20,7 +23,10 @@ export default class PlayerController extends InputController {
             this.movementKey.backward, 
             this.movementKey.left, 
             this.movementKey.right, 
-            this.movementKey.jump 
+            this.movementKey.jump,
+
+            this.movementKey.rotateLeft,
+            this.movementKey.rotateRight
         ])
     }
 }

@@ -1,59 +1,59 @@
 import * as THREE from 'three'
-import { IGameEntity } from '../interface/GameEntity'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { Game } from '../../Game/Game'
-import { IGameObject } from '../interface/GameObject';
+
 import { IExperience } from '../interface/Experience';
+import GameObject from '../GameUtils/GameObject';
 
 
-export class Camera implements IGameEntity {
+export class Camera extends GameObject {
     public instance!: THREE.PerspectiveCamera;
     private controls!: OrbitControls;
 
-    private _currentPosition : THREE.Vector3 = new THREE.Vector3();
-    private _lookPosition : THREE.Vector3 = new THREE.Vector3();
+    private _currentPosition: THREE.Vector3 = new THREE.Vector3();
+    private _lookPosition: THREE.Vector3 = new THREE.Vector3();
 
-    private _target !: THREE.Mesh;
-
-    constructor(private game : IExperience, orbitalControls ?: boolean){
+    constructor(private game: IExperience, orbitalControls?: boolean) {
+        super();
         this.Init();
         this.InitControls(orbitalControls);
+        this.InitEvent();
     }
 
-    Init(){
+    InitEvent() {
+        this.On("update.position", (newPosition: THREE.Vector3) => { this.UpdatePosition(newPosition); })
+    }
+
+    
+    Init() {
         this.instance = new THREE.PerspectiveCamera(
             75,
-            window.innerWidth / window.innerHeight, 
-            0.1, 
+            window.innerWidth / window.innerHeight,
+            0.1,
             1000
         )
     }
     
-    private InitControls(orbitalControls ?: boolean) {
+    private InitControls(orbitalControls?: boolean) {
         if (orbitalControls) {
             this.instance.position.x = 1;
             this.controls = new OrbitControls(this.instance, this.game.engine.canvas);
         }
     }
-
-    public SetPosition(x : number, y : number = 0, z : number = 0 ){
-        this.instance.position.set(x, y, z);
-    }
-    public SetTarget(target : THREE.Mesh) {
-        this._target = target;
-    }
-
-    private CalculateLookAt(){
-        const idealLookAt = new THREE.Vector3(0, 5, 20);
-        //idealLookAt.applyQuaternion(this._target)
+    
+    
+    UpdatePosition(pos: THREE.Vector3) {
+        this.instance.position.copy(pos);
+        //console.log(pos);
     }
 
     public Update(deltatime: number) {
-        
+
     }
 
     public Resize() {
         this.instance.aspect = window.innerWidth / window.innerHeight;
         this.instance.updateProjectionMatrix();
+
+
     }
 }

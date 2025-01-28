@@ -10,6 +10,7 @@ import { Fox } from './Object/Fox';
 import GameObjectManager from '../Engine/GameUtils/GameObjectManager';
 import MeshRenderer from '../Engine/GameUtils/MeshRenderer';
 import Torus from './Object/Torus';
+import CameraTPS from './Object/CameraTPS';
 
 export class Game implements IExperience {
     public readonly engine !: Engine;
@@ -52,6 +53,7 @@ export class Game implements IExperience {
         this._gameObjectManager.Add(fox,"fox");
         fox.Start();
         this.engine.scene.add(fox.GetModel());
+        this.camera.SetTarget(fox);
 
 
         const torus = new Torus();
@@ -70,11 +72,11 @@ export class Game implements IExperience {
     }
     
     private InitCamera() {
-        this.camera = new Camera(this, true);
+        this.camera = new CameraTPS(this);
         
         this.engine.scene.add(this.camera.instance);
 
-        this.camera.SetPosition(20, 5, 0);
+        //this.camera.SetPosition(20, 5, 0);
     }
 
     private InitDebug() {
@@ -83,9 +85,9 @@ export class Game implements IExperience {
     }
 
     Update(deltaTime : number) {
-        this.camera.Update(deltaTime);
         
         this._gameObjectManager.Update(deltaTime);
+        this.camera.Update(deltaTime);
         
         if (this.engine.DebugLogMode >= 3) {
             console.log("Experience Game was update !");

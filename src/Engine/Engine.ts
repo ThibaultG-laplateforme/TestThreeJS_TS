@@ -68,6 +68,9 @@ export class Engine {
         }
         
         let deltaTime = this.timer.getDelta();
+
+        //console.log("FPS : " + 1 / deltaTime);
+        
     
         this.renderer.Update();
         this.physicsScene.fixedStep(deltaTime); //TODO: le passer en asyncrone ?
